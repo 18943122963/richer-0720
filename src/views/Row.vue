@@ -37,7 +37,7 @@ import CubeCanvas from "../components/Common/CubeCanvas";
 import HeaderTime from "../components/Row/HeaderTime";
 import GameCenter from "../components/Row/GameCenter";
 import FooterButton from "../components/Row/FooterButton";
-import add from "../utils/websocket";
+import { resize } from "../../src/utils/zoom";
 export default {
   components: {
     CubeCanvas,
@@ -52,6 +52,13 @@ export default {
     };
   },
   mounted() {
+    window.onresize = () => {
+      //若竖屏
+      if (window.innerHeight > window.innerWidth) {
+        this.$router.push("/Column");
+      }
+      document.getElementById("app").style.cssText = "zoom:" + resize();
+    };
     if (typeof WebSocket === "undefined") {
       alert("您的浏览器不支持WebSocket，请更换浏览器");
     } else {
@@ -77,11 +84,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.home {
-  height: 100%;
-}
+.home,
 .bg1 {
   height: 100%;
+  width: 100%;
+}
+.bg1 {
   display: flex;
 }
 .left {
@@ -103,16 +111,18 @@ export default {
   background-size: 100% 100%;
 }
 .fill-left {
-  height: 100%;
   background: url("../assets/img/row/fill-left.png") repeat-x;
-  background-size: 100% 100%;
-  flex: 1;
 }
 .fill-right {
-  height: 100%;
   background: url("../assets/img/row/fill-right.png") repeat-x;
+}
+.fill-left,
+.fill-right {
+  height: 100%;
   background-size: 100% 100%;
   flex: 1;
+  /* 因为小数出现空隙，让他拉伸一点 */
+  margin: 0 -3px;
 }
 
 .bg2 {
@@ -215,13 +225,6 @@ export default {
   100% {
     top: 80%;
     opacity: 0;
-  }
-}
-
-//竖屏时，调整出现黑线
-@media screen and (orientation: portrait) {
-  .center {
-    width: 895px;
   }
 }
 </style>

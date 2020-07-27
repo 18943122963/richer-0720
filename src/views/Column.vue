@@ -18,6 +18,7 @@ import HeaderTime from "../components/Column/HeaderTime";
 import CubeCanvas from "../components/Common/CubeCanvas";
 import GameCenter from "../components/Column/GameCenter";
 import TwoBox from "../components/Column/TwoBox";
+import { resize } from "../../src/utils/zoom";
 export default {
   components: {
     HeaderTime,
@@ -29,15 +30,25 @@ export default {
     return {
       text: "恭喜xxx获得xxx"
     };
+  },
+  mounted() {
+    window.onresize = () => {
+      //若横屏
+      if (window.innerHeight < window.innerWidth) {
+        this.$router.push("/Row");
+      }
+      document.getElementById("app").style.cssText = "zoom:" + resize();
+    };
   }
 };
 </script>
 <style lang="scss" scoped>
+@import "../assets/css/_picture";
 .bg {
-  height: 1960px;
+  height: 1920px;
   width: 1080px;
   margin: auto;
-  background: url("../assets/img/column/background.png") no-repeat;
+  background: url($column-bg) no-repeat;
   background-size: 100% 100%;
   overflow: hidden;
   position: relative;

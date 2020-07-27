@@ -1,6 +1,6 @@
 <template>
-  <div id="app" ref="app">
-    <Column></Column>
+  <div id="app">
+    <router-view></router-view>
   </div>
 </template>
 <script>
@@ -17,9 +17,7 @@ export default {
     };
   },
   mounted() {
-    window.onresize = () => {
-      this.$refs.app.style.cssText = "zoom:" + resize();
-    };
+    document.getElementById("app").style.cssText = "zoom:" + resize();
   }
 };
 </script>

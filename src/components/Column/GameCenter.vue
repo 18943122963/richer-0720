@@ -21,12 +21,13 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
+@import "../../assets/css/_picture";
 .game-box {
   width: 50%;
   height: 100%;
   margin: 5% auto 0;
-  background: url("../../assets/img/column/game-box.png") no-repeat;
+  background: url($column-gamecenter-gamebox) no-repeat;
   background-size: 100% 100%;
   border-radius: 20px;
   display: flex;
