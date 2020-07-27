@@ -1,32 +1,45 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div id="app" ref="app">
+    <Column></Column>
   </div>
 </template>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+<script>
+import Column from "./views/Column";
+import { resize } from "../src/utils/zoom";
+// import Column from "./views/Row";
+export default {
+  components: {
+    Column
+  },
+  data() {
+    return {
+      zoom: 1
+    };
+  },
+  mounted() {
+    window.onresize = () => {
+      this.$refs.app.style.cssText = "zoom:" + resize();
+    };
   }
+};
+</script>
+<style lang="scss">
+@font-face {
+  font-family: "BEBAS NENU BOLD";
+  src: url("../src/assets/font/bebasneue_bold-webfont.woff") format("woff");
+}
+body,
+html,
+#app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #300760;
+  font-family: BEBAS NENU BOLD;
+}
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
