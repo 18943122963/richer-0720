@@ -1,6 +1,6 @@
 <template>
-  <div class="bg">
-    <div class="up-box">
+  <div class="bg" :style="bg">
+    <div class="up-box" :style="upBox">
       <HeaderTime></HeaderTime>
       <CubeCanvas class="CubeCanvas"></CubeCanvas>
       <GameCenter class="GameCenter"></GameCenter>
@@ -19,6 +19,7 @@ import CubeCanvas from "../components/Common/CubeCanvas";
 import GameCenter from "../components/Column/GameCenter";
 import TwoBox from "../components/Column/TwoBox";
 import { resize } from "../../src/utils/zoom";
+import { loadPicture } from "../utils/picture";
 export default {
   components: {
     HeaderTime,
@@ -39,22 +40,31 @@ export default {
       }
       document.getElementById("app").style.cssText = "zoom:" + resize();
     };
+  },
+
+  computed: {
+    // 加载图片
+    ...loadPicture({
+      bg: "bg",
+      upBox: "upBox"
+    })
   }
 };
 </script>
 <style lang="scss" scoped>
-@import "../assets/css/_picture";
 .bg {
+  background: url("../assets/img/column/background.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   height: 1920px;
   width: 1080px;
   margin: auto;
-  background: url($column-bg) no-repeat;
-  background-size: 100% 100%;
   overflow: hidden;
   position: relative;
 }
 .up-box {
-  background: url("../assets/img/column/top.png") no-repeat;
+  background: url("../assets/img/column/top.png");
+  background-repeat: no-repeat;
   background-size: 100% 100%;
   height: 50%;
   width: 100%;

@@ -1,12 +1,12 @@
 <template>
   <div id="app">
+    <!-- 默认加载column页面 -->
     <router-view></router-view>
   </div>
 </template>
 <script>
 import Column from "./views/Column";
 import { resize } from "../src/utils/zoom";
-// import Column from "./views/Row";
 export default {
   components: {
     Column
@@ -17,6 +17,7 @@ export default {
     };
   },
   mounted() {
+    // 初始化布局
     document.getElementById("app").style.cssText = "zoom:" + resize();
   }
 };

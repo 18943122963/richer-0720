@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="game-box">
+    <div class="game-box" :style="gameBox">
       <div class="title">{{title}}</div>
       <div class="imgs">
         <img src="../../assets/img/row/game-ad-left.png" alt />
@@ -12,22 +12,28 @@
 </template>
 
 <script>
+import { loadPicture } from "../../utils/picture";
 export default {
   data() {
     return {
       title: "2999元华为nova6",
       price: "5"
     };
+  },
+  computed: {
+    ...loadPicture({
+      gameBox: "gameBox"
+    })
   }
 };
 </script>
 <style lang="scss" scoped>
-@import "../../assets/css/_picture";
 .game-box {
   width: 50%;
   height: 100%;
   margin: 5% auto 0;
-  background: url($column-gamecenter-gamebox) no-repeat;
+  background: url("../../assets/img/column/game-box.png");
+  background-repeat: no-repeat;
   background-size: 100% 100%;
   border-radius: 20px;
   display: flex;
